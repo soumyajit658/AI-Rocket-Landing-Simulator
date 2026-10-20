@@ -1,189 +1,129 @@
+🚀 AI Rocket Landing Simulator
+An experimental reinforcement learning project that trains and evaluates an AI agent to land a lunar lander using Proximal Policy Optimization (PPO). The project also includes reward-shaping experiments, model comparisons, and a Pygame visualization with both AI and manual flight modes.
+🌕 Project Overview
+The goal is to train an agent to control a lander in Gymnasium's LunarLander-v3 environment. The project compares baseline PPO training, a reward-shaped experiment, and extended PPO training, then visualizes the trained policy.
 
-# 🚀 AI Rocket Landing with Reward Shaping
-
-An experimental Reinforcement Learning project that trains an AI agent to perform lunar landings using Proximal Policy Optimization (PPO).
-
-The project explores baseline PPO training, reward shaping, and extended training to improve landing performance in the Gymnasium LunarLander-v3 environment. It also includes a custom cinematic lunar landing visualization.
-
-## 🌙 Project Overview
-
-Landing a spacecraft safely requires controlling its position, velocity, and orientation. This project uses reinforcement learning to train an AI agent to make landing decisions through repeated interaction with a simulated environment.
-
-The project compares different training approaches and evaluates their performance across multiple episodes.
-
-## ✨ Key Features
-
-- 🧠 **Reinforcement Learning:** PPO agent using Stable-Baselines3.
-- 🚀 **Baseline Training:** Train an agent in the LunarLander-v3 environment.
-- 🎯 **Reward Shaping Experiment:** Explore custom reward modifications to influence agent behaviour.
-- 📈 **Extended Training:** Continue training a PPO model and evaluate its performance.
-- 🧪 **Model Evaluation:** Compare rewards across multiple episodes.
-- 📊 **Performance Visualization:** Generate model comparison plots.
-- 🌕 **Custom Lunar Scene:** Display the trained agent in a cinematic moon-landing visualization using Pygame.
-
-## 🛠️ Tech Stack
-
+The cinematic moon scene is a visual layer. The flight physics and rewards come from Gymnasium's LunarLander environment.
+✨ Features
+- PPO reinforcement learning using Stable-Baselines3.
+- Baseline and extended training experiments.
+- Reward shaping experiment to explore how reward design affects learning.
+- Evaluation and comparison scripts for measuring model performance.
+- Pygame visualization with a custom lunar background.
+- Manual flight mode with keyboard controls in play_moon_game.py.
+- AI flight mode using the trained discrete-action PPO model.
+- Result plots for comparing model performance.
+🧰 Tech Stack
 - Python
 - Gymnasium
 - Stable-Baselines3
 - PyTorch
 - Box2D
-- Pygame
+- Pygame / pygame-ce
 - Pillow
+- NumPy
 - Matplotlib
-
-## 📂 Project Structure
-
-```text
-AI-Rocket-Landing-Reward-Shaping/
-│
+📂 Project Structure
+AI-Rocket-Landing-Simulator/
 ├── check_setup.py
 ├── train_ppo.py
 ├── train_shaped_ppo.py
 ├── continue_training.py
-│
 ├── evaluate_ppo.py
 ├── evaluate_shaped_ppo.py
 ├── evaluate_20_episodes.py
-│
 ├── compare_agents.py
 ├── compare_three_models.py
 ├── plot_results.py
-│
 ├── watch_random_agent.py
 ├── watch_extended_agent.py
 ├── watch_moon_landing.py
-│
+├── play_moon_game.py
 ├── create_moon_background.py
 ├── moon_background.png
 ├── moon_scene.png
 ├── model_comparison.png
-│
 ├── ppo_lunarlander.zip
 ├── ppo_lunarlander_shaped.zip
 ├── ppo_lunarlander_extended.zip
-│
+├── requirements.txt
 ├── .gitignore
 └── README.md
-```
-
-## ⚙️ Installation and Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/soumyajit658/AI-Rocket-Landing-Reward-Shaping.git
-cd AI-Rocket-Landing-Reward-Shaping
-```
-
-### 2. Create a virtual environment
-
-```bash
+The model files shown above are expected to be present if you want to run the pre-trained agents. If a model file is not included in a future version of the repository, train or obtain the corresponding model before running scripts that load it.
+⚙️ Installation
+1. Clone the repository
+git clone https://github.com/soumyajit658/AI-Rocket-Landing-Simulator.git
+cd AI-Rocket-Landing-Simulator
+2. Create and activate a virtual environment (Windows PowerShell)
 python -m venv .venv
-```
-
-Activate it on Windows PowerShell:
-
-```powershell
 .\.venv\Scripts\Activate.ps1
-```
-
-### 3. Install the dependencies
-
-```bash
+If PowerShell blocks activation, you can use the environment's Python directly without activating it:
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+3. Install dependencies
 python -m pip install --upgrade pip
-python -m pip install gymnasium stable-baselines3 pygame-ce pillow matplotlib swig
-python -m pip install box2d-py
-```
-
-If Box2D installation fails, consult the Gymnasium Box2D installation instructions for your Python and operating-system version.
-
-## ▶️ Run the Lunar Landing Visualization
-
-Make sure these files are available in the project directory:
-
-- `watch_moon_landing.py`
-- `moon_scene.png`
-- `ppo_lunarlander_extended.zip`
-
-Run:
-
-```powershell
+python -m pip install -r requirements.txt
+If Box2D installation fails on your machine, check the Gymnasium Box2D installation guidance for your Python version and operating system.
+🎮 Run the Game
+Keep moon_scene.png and ppo_lunarlander_extended.zip in the same folder as the game scripts.
+Play manually or watch the AI
+python play_moon_game.py
+- Press 1 for Manual Mode.
+- Press 2 for AI PPO Mode.
+- In Manual Mode: ↑ applies main thrust; ← and → steer.
+- Press R to restart a flight.
+- Press Esc to return to the menu.
+Manual mode uses continuous controls; AI mode uses the discrete-action PPO environment expected by the trained model.
+Watch the trained AI land
 python watch_moon_landing.py
-```
-
-The visualization displays the trained agent with a custom lunar background and a flight-style interface.
-
-## 🧠 Training Models
-
-### Baseline PPO
-
-```powershell
+- Space: pause/resume.
+- R: restart the episode.
+- Esc: quit.
+Other visualization scripts
+python watch_extended_agent.py
+python watch_random_agent.py
+🧠 Train and Evaluate
+Baseline PPO training
 python train_ppo.py
-```
-
-### Reward-Shaped PPO
-
-```powershell
+Reward-shaped PPO experiment
 python train_shaped_ppo.py
-```
+Continue training
+python continue_training.py
+Review each script's configuration before running it. Training may overwrite model files depending on the script, so back up any model you want to preserve.
 
-### Evaluate the Models
-
-```powershell
+Evaluate models
 python evaluate_ppo.py
 python evaluate_shaped_ppo.py
 python evaluate_20_episodes.py
-```
+Compare models and generate plots
+python compare_agents.py
+python compare_three_models.py
+python plot_results.py
+📊 Experimental Results
+In one evaluation of the extended PPO model over 20 episodes:
+Metric	Result
+Average reward	194.49
+Median reward	253.45
+Best reward	277.88
+Episodes scoring at least 200	15 / 20
 
-Training scripts may overwrite existing model files, depending on their implementation. Back up important trained models before retraining.
 
-## 📊 Experimental Results
+These values describe one evaluation run, not a guaranteed result. Scores can vary with random seeds, environment versions, and training settings.
 
-In one evaluation of the extended PPO model across 20 episodes:
+In the experiments conducted, extended PPO performed better than the reward-shaped model. Reward shaping is an experiment in this project, not a claim that shaping always improves performance.
+⚠️ Technical Notes
+- The PPO policy is trained for Gymnasium's discrete-action LunarLander-v3 environment.
+- Manual controls in play_moon_game.py use LunarLanderContinuous-v3; the trained discrete PPO model is not used to control that continuous environment.
+- The moon background and landing-pad artwork are visual elements. They do not replace the underlying environment physics with a realistic lunar or 3D simulation.
+- For reliable comparisons, evaluate models using the same episode seeds and environment configuration.
+🚀 Future Improvements
+- Improve reward functions and test across more random seeds.
+- Add training curves and TensorBoard logging.
+- Add a short gameplay demo or GIF.
+- Improve flight HUD and landing analysis.
+- Package the project for easier installation and execution.
+- Explore more realistic physics or simulation environments.
+👨‍💻 Author
+Soumyajit Bhowmik
 
-| Metric | Result |
-|---|---:|
-| Average reward | 194.49 |
-| Median reward | 253.45 |
-| Best reward | 277.88 |
-| Episodes scoring at least 200 | 15 / 20 |
-
-These results are from a particular evaluation run. Performance can vary depending on random seeds, environment settings, and training configuration.
-
-The reward-shaped experiment and extended PPO model are separate approaches; reward shaping did not automatically produce better results in the experiments conducted.
-
-## 🔬 Learning Outcomes
-
-Through this project, I explored:
-
-- Reinforcement learning fundamentals
-- PPO-based policy training
-- Reward shaping and its limitations
-- Model evaluation and reward analysis
-- Comparing training approaches
-- Visualizing an AI agent using Pygame
-- Building and documenting an end-to-end machine learning experiment
-
-## ⚠️ Important Technical Note
-
-The AI policy is trained in the standard Gymnasium LunarLander-v3 environment. The custom lunar scene is a visualization layer; it does not replace the underlying physics with a realistic 3D lunar simulation.
-
-## 🚀 Future Improvements
-
-- Experiment with more effective reward functions.
-- Evaluate agents across additional random seeds.
-- Track training performance with TensorBoard.
-- Improve landing-position and touchdown analysis.
-- Add more interactive visualization features.
-- Explore more realistic physics and simulation environments.
-
-## 👨‍💻 Author
-
-**Soumyajit Bhowmik**
-
-GitHub: [@soumyajit658](https://github.com/soumyajit658)
-
----
-
-⭐ If you find this project interesting, consider giving the repository a star!
+GitHub: @soumyajit658
+If you find this project interesting, consider starring the repository.
