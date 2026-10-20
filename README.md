@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # 🚀 AI Rocket Landing Simulator
 
@@ -207,3 +208,8 @@ GitHub: [@soumyajit658](https://github.com/soumyajit658)
 ---
 
 If you find this project interesting, consider starring the repository.
+=======
+git add README.md
+git commit -m "Update project README"
+git push origin main
+>>>>>>> daefdb5 (Update project README)
